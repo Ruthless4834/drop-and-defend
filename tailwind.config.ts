@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -51,6 +52,16 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
+				},
+				// Game-specific colors
+				game: {
+					health: 'hsl(var(--health))',
+					shield: 'hsl(var(--shield))',
+					danger: 'hsl(var(--danger))',
+					warning: 'hsl(var(--warning))',
+					'weapon-rare': 'hsl(var(--weapon-rare))',
+					'weapon-epic': 'hsl(var(--weapon-epic))',
+					'weapon-legendary': 'hsl(var(--weapon-legendary))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
@@ -88,7 +99,18 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'glow-pulse': 'glow-pulse 2s ease-in-out infinite alternate',
+				'storm-warning': 'storm-warning 1s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'gradient-epic': 'var(--gradient-epic)',
+				'gradient-health': 'var(--gradient-health)',
+				'gradient-shield': 'var(--gradient-shield)'
+			},
+			boxShadow: {
+				'glow': 'var(--shadow-glow)',
+				'danger': 'var(--shadow-danger)'
 			}
 		}
 	},
