@@ -29,21 +29,23 @@ export const GameLobby = ({ onStartGame }: GameLobbyProps) => {
             <div className="text-left space-y-2 text-sm">
               <div className="font-medium text-primary">Game Features:</div>
               <ul className="space-y-1 text-muted-foreground">
+                <li>• Full 3D Battle Royale environment</li>
+                <li>• AI bots with smart behavior</li>
+                <li>• Real-time shooting mechanics</li>
                 <li>• Shrinking storm zone</li>
+                <li>• Building & crafting system</li>
                 <li>• Loot collection system</li>
-                <li>• Building mechanics</li>
-                <li>• Health & shield system</li>
-                <li>• Survival gameplay</li>
               </ul>
             </div>
 
             <div className="text-left space-y-2 text-sm">
               <div className="font-medium text-primary">Controls:</div>
               <ul className="space-y-1 text-muted-foreground">
-                <li>• WASD/Arrow keys: Move</li>
-                <li>• 1/2/3: Select build tool</li>
-                <li>• Click: Place building</li>
-                <li>• Walk over loot to collect</li>
+                <li>• WASD: Move around</li>
+                <li>• Mouse: Look & aim</li>
+                <li>• Left Click: Shoot</li>
+                <li>• F1/F2/F3: Build walls/ramps/floors</li>
+                <li>• Walk near loot to collect</li>
               </ul>
             </div>
 

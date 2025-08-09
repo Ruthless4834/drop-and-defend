@@ -1,14 +1,23 @@
 export interface Position {
   x: number;
   y: number;
+  z: number;
+}
+
+export interface Vector3 {
+  x: number;
+  y: number;
+  z: number;
 }
 
 export interface Player {
   id: string;
   position: Position;
+  rotation: Vector3;
   health: number;
   shield: number;
   isAlive: boolean;
+  isBot?: boolean;
   materials: {
     wood: number;
     stone: number;
@@ -28,6 +37,8 @@ export interface Weapon {
   maxAmmo: number;
   rarity: 'common' | 'rare' | 'epic' | 'legendary';
   range: number;
+  fireRate: number;
+  projectileSpeed: number;
 }
 
 export interface LootItem {
@@ -41,8 +52,19 @@ export interface Building {
   id: string;
   type: 'wall' | 'ramp' | 'floor';
   position: Position;
+  rotation: Vector3;
   material: 'wood' | 'stone' | 'metal';
   health: number;
+}
+
+export interface Projectile {
+  id: string;
+  position: Position;
+  direction: Vector3;
+  speed: number;
+  damage: number;
+  playerId: string;
+  weapon: Weapon;
 }
 
 export interface GameState {
@@ -50,6 +72,7 @@ export interface GameState {
   myPlayerId: string;
   buildings: Building[];
   loot: LootItem[];
+  projectiles: Projectile[];
   stormRadius: number;
   stormCenter: Position;
   gamePhase: 'lobby' | 'dropping' | 'playing' | 'ended';

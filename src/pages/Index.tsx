@@ -1,27 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useGameState } from '@/hooks/useGameState';
 import { GameLobby } from '@/components/game/GameLobby';
-import { GameMap } from '@/components/game/GameMap';
+import { Game3D } from '@/components/game/Game3D';
 import { GameHUD } from '@/components/game/GameHUD';
 import { GameOver } from '@/components/game/GameOver';
 
 const Index = () => {
   const { gameState, actions } = useGameState();
-  const [buildType, setBuildType] = useState<'wall' | 'ramp' | 'floor' | null>(null);
 
   const myPlayer = gameState.players.find(p => p.id === gameState.myPlayerId);
 
-  const handleBuild = (type: 'wall' | 'ramp' | 'floor') => {
-    setBuildType(type);
-  };
-
-  const handleBuildAt = (type: 'wall' | 'ramp' | 'floor', position: { x: number; y: number }) => {
+  const handleBuildAt = (type: 'wall' | 'ramp' | 'floor', position: { x: number; y: number; z: number }) => {
     if (myPlayer && myPlayer.materials.wood >= 10) {
       actions.buildStructure(type, position);
     }
   };
-
-  // Victory condition is now handled in the useGameState hook
 
   if (gameState.gamePhase === 'lobby') {
     return <GameLobby onStartGame={actions.initializeGame} />;
@@ -41,23 +34,34 @@ const Index = () => {
   }
 
   return (
-    <div className="relative">
-      <GameMap
-        player={myPlayer}
+    <div className="relative h-screen">
+      <Game3D
+        players={gameState.players}
+        myPlayerId={gameState.myPlayerId}
         loot={gameState.loot}
         buildings={gameState.buildings}
+        projectiles={gameState.projectiles}
         stormRadius={gameState.stormRadius}
         stormCenter={gameState.stormCenter}
         onMove={actions.movePlayer}
+        onLookAround={actions.rotatePlayer}
+        onShoot={actions.shootWeapon}
         onCollectLoot={actions.collectLoot}
-        onBuildAt={handleBuildAt}
+        onProjectileHit={actions.handleProjectileHit}
       />
       
       <GameHUD
         player={myPlayer}
         playersAlive={gameState.playersAlive}
         stormRadius={gameState.stormRadius}
-        onBuild={handleBuild}
+        onBuild={(type) => {
+          // Build at player's position
+          handleBuildAt(type, {
+            x: myPlayer.position.x + Math.sin(myPlayer.rotation.y) * 3,
+            y: myPlayer.position.y,
+            z: myPlayer.position.z + Math.cos(myPlayer.rotation.y) * 3
+          });
+        }}
       />
     </div>
   );

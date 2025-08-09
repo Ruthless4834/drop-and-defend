@@ -59,6 +59,21 @@ export const GameHUD = ({ player, playersAlive, stormRadius, onBuild }: GameHUDP
             </div>
           </div>
 
+          {/* Weapon Info */}
+          <div className="flex items-center gap-4">
+            {player.inventory.weapons.length > 0 && (
+              <div className="space-y-1">
+                <div className="font-medium text-primary text-sm">
+                  {player.inventory.weapons[player.inventory.activeWeapon]?.name}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Ammo: {player.inventory.weapons[player.inventory.activeWeapon]?.ammo}/
+                  {player.inventory.weapons[player.inventory.activeWeapon]?.maxAmmo}
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Building Controls */}
           <div className="flex gap-2">
             <Button 
@@ -66,24 +81,27 @@ export const GameHUD = ({ player, playersAlive, stormRadius, onBuild }: GameHUDP
               size="sm"
               onClick={() => onBuild('wall')}
               disabled={player.materials.wood < 10}
+              className="text-xs"
             >
-              Wall
+              Wall [F1]
             </Button>
             <Button 
               variant="secondary" 
               size="sm"
               onClick={() => onBuild('ramp')}
               disabled={player.materials.wood < 10}
+              className="text-xs"
             >
-              Ramp
+              Ramp [F2]
             </Button>
             <Button 
               variant="secondary" 
               size="sm"
               onClick={() => onBuild('floor')}
               disabled={player.materials.wood < 10}
+              className="text-xs"
             >
-              Floor
+              Floor [F3]
             </Button>
           </div>
 
